@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.truncate-overflow {
+    max-height: 150px; /* Altura máxima permitida antes de truncar */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp:2; /* Número de líneas a mostrar antes de truncar */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; /* Mostrar puntos suspensivos (...) cuando se trunca el contenido */
+    white-space: normal; /* Permitir saltos de línea */
+  
+  }
+
+
+#recentPostCol{
+    border-left: 1px solid rgb(190, 190, 190);
+}
+
+
+.doubleLineSeparator{
+    border-bottom: 3px double black;
+}
+
+.scrolled-container {
+    display: flex;
+  }
+  .scrolled-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .scrolled-box:first-child  { margin-right: auto; }
+  
+  .scrolled-box:last-child  { margin-left: auto;  }
