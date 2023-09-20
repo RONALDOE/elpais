@@ -35,7 +35,6 @@ export default function Home() {
             category={category.category_post}
             key={category.category_post}
           />
-          <LineDivider />
         </>
       ))}
     </Layout>
