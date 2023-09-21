@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Post } from "../interfaces.ts";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function RecentNews() {
@@ -9,7 +10,7 @@ export default function RecentNews() {
     const getRecentPosts = async () => {
       try {
         const response = await axios.get<Post[]>(
-          "https://apitest.rdedigital.com/api/v1/latestpost"
+          "https://apitest.rdedigital.com/api/v1/latestpost",
         );
 
         if (response.data) {
@@ -20,82 +21,93 @@ export default function RecentNews() {
       }
     };
 
-    // Llama a la función para cargar los posts cuando el componente se monta
     getRecentPosts();
   }, []);
 
   return (
-    <section className=' doubleLineSeparator pb-8' id='recentNewsSection'>
+    <section className=" doubleLineSeparator pb-8" id="recentNewsSection">
       {posts.length > 0 && (
-        <div className='max-w-full w-full grid grid-cols-4 grid-rows-auto gap-4'>
-          <div id='mostRecentPost' className='col-span-2'>
-            <div className='flex flex-col items-center justify-center h-full'>
-              <div id='imgContainer' className='h-80 w-full px-4'>
-                <img
-                  src={posts[0].media}
-                  alt=''
-                  className='object-cover h-full w-full'
-                />
+        <div className="grid-rows-auto grid w-full max-w-full grid-cols-4 gap-4">
+          <div id="mostRecentPost" className="col-span-2">
+            <div className="flex h-full flex-col items-center justify-center">
+              <div id="" className="h-80 w-full px-4">
+                <Link to={`post/${posts[0].id}`}>
+                  <img
+                    src={posts[0].media}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </Link>
               </div>
-              <p className='w-full text-right text-gray-500 italic mt-2'>
+              <p className="font-MajritL mt-2 w-full text-right text-[.8rem]  text-gray-500">
                 {posts[0].title.rendered}
               </p>
-              <h2 className='w-full text-black font-semibold text-3xl'>
-                {posts[0].title.rendered}
-              </h2>
-              <p className='text-gray-800 text-left w-full text-sm mb-2'>
+              <Link to={`post/${posts[0].id}`}>
+                <h2 className="font-MajritB w-full text-3xl font-semibold text-black">
+                  {posts[0].title.rendered}
+                </h2>
+              </Link>
+
+              <p className="font-MajritR mb-2 w-full text-left text-sm text-gray-800">
                 {posts[0].author.name} | {posts[0].category}
               </p>
-              <p>
+              <p className="font-MajritL">
                 {posts[0].excerpt.rendered.substring(
                   3,
-                  posts[0].excerpt.rendered.indexOf(".") + 1
+                  posts[0].excerpt.rendered.indexOf(".") + 1,
                 )}
               </p>
             </div>
           </div>
 
-          <div id='recentPostCol' className='col-span-1 flex flex-col'>
+          <div
+            id="recentPostCol"
+            className="font-MajritL col-span-1 flex flex-col"
+          >
             {posts.slice(1, 4).map((post) => (
-              <div key={post.id} className='p-4  flex-grow'>
-                <h2 className='text-black font-semibold text-xl'>
-                  {post.title.rendered}
-                </h2>
-                <p className='text-gray-800 text-left text-sm'>
-                  {post.author.name} | {post.category}
-                </p>
-                <div
-                  className='truncate-overflow'
-                  dangerouslySetInnerHTML={{
-                    __html: post.excerpt.rendered.substring(
-                      3,
-                      post.excerpt.rendered.indexOf(".") + 1
-                    ),
-                  }}
-                />
+              <div key={post.id} className="flex-grow  p-4">
+                <Link to={`post/${post.id}`}>
+                  <h2 className="font-MajritB text-xl font-semibold text-black">
+                    {post.title.rendered}
+                  </h2>
+                  <p className="font-MajritR text-left text-sm text-gray-800">
+                    {post.author.name} | {post.category}
+                  </p>
+                  <div
+                    className="truncate-overflow font-MajritL"
+                    dangerouslySetInnerHTML={{
+                      __html: post.excerpt.rendered.substring(
+                        3,
+                        post.excerpt.rendered.indexOf(".") + 1,
+                      ),
+                    }}
+                  />
+                </Link>
               </div>
             ))}
           </div>
 
-          <div id='recentPostCol' className='col-span-1 flex flex-col'>
+          <div id="recentPostCol" className="col-span-1 flex flex-col ">
             {posts.slice(4, 7).map((post) => (
-              <div key={post.id} className='p-4  flex-grow'>
-                <h2 className='text-black font-semibold text-xl'>
-                  {post.title.rendered}
-                </h2>
-                <p className='text-gray-800 text-left text-sm'>
-                  {post.author.name} | {post.category}
-                </p>
-                <div
-                  className='truncate-overflow'
-                  dangerouslySetInnerHTML={{
-                    __html: post.excerpt.rendered.substring(
-                      3,
-                      post.excerpt.rendered.indexOf(".") + 1
-                    ),
-                  }}
-                />
-              </div>
+              <Link to={`post/${post.id}`}>
+                <div key={post.id} className="flex-grow  p-4">
+                  <h2 className="font-MajritB text-xl font-semibold text-black">
+                    {post.title.rendered}
+                  </h2>
+                  <p className="font-MajritR text-left text-sm text-gray-800">
+                    {post.author.name} | {post.category}
+                  </p>
+                  <div
+                    className="truncate-overflow font-MajritL"
+                    dangerouslySetInnerHTML={{
+                      __html: post.excerpt.rendered.substring(
+                        3,
+                        post.excerpt.rendered.indexOf(".") + 1,
+                      ),
+                    }}
+                  />
+                </div>
+              </Link>
             ))}
           </div>
         </div>

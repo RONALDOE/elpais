@@ -14,7 +14,7 @@ export default function Home() {
     const getCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          "https://api.rdedigital.com/api/v2/categories"
+          "https://api.rdedigital.com/api/v2/categories",
         );
         if (response.data) {
           setCategories(response.data);

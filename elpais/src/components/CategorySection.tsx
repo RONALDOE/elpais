@@ -15,7 +15,7 @@ export default function CategorySection({ category }: Props) {
     const getRecentPosts = async () => {
       try {
         const response = await axios.get<Post[]>(
-          `https://apitest.rdedigital.com/api/v1/posts/category/` + category
+          `https://apitest.rdedigital.com/api/v1/posts/category/` + category,
         );
 
         console.log(category);
@@ -27,89 +27,92 @@ export default function CategorySection({ category }: Props) {
       }
     };
 
-    // Llama a la función para cargar los posts cuando el componente se monta
     getRecentPosts();
   }, []);
 
   return (
-    <section id={`${category}Section`} className='pb-8 w-full'>
+    <section id={`${category}Section`} className="w-full pb-8">
       {posts.length > 3 ? (
         <div>
-          <div className='w-full border-b mb-4   border-black'>
-            <span className='text-3xl font-extrabold text-left w-56 pb-2 border-b-[.3rem] border-black block '>
+          <div className="font-MajritL mb-4 w-full   border-b border-black">
+            <span className="font-MajritB block w-56 border-b-[.3rem]  border-black pb-2 text-left text-3xl font-extrabold ">
               <h1>{category}</h1>
             </span>
           </div>
-          <div className='max-w-full w-full grid grid-cols-4 grid-rows-auto gap-4'>
-            <div id='mostRecentPost' className='col-span-2'>
-              <div className='flex flex-col  justify-center h-full'>
+          <div className="grid-rows-auto grid w-full max-w-full grid-cols-4 gap-4">
+            <div id="mostRecentPost" className="col-span-2">
+              <div className="flex h-full  flex-col justify-center">
                 <Link to={`post/${posts[0].id}`}>
                   <div
-                    id='imgContainer'
-                    className='h-80 w-full px-4 hover-translate-y '
+                    id="imgContainer"
+                    className="hover-translate-y h-80 w-full px-4 "
                     style={{ backgroundImage: `url(${posts[0].media})` }}
                   />
                 </Link>
-                <p className='w-full text-right text-gray-500 italic mt-2'>
+                <p className="font-MajritL mt-2 w-full text-right text-[.8rem] text-gray-500">
                   {posts[0].title.rendered}
                 </p>
                 <Link to={`post/${posts[0].id}`}>
-                  <h2 className='w-full text-black font-semibold text-3xl hover-translate-y '>
+                  <h2 className="hover-translate-y font-MajritB w-full text-3xl font-semibold  text-black">
                     {posts[0].title.rendered}
                   </h2>
                 </Link>
-                <p className='text-gray-800 text-left w-full text-sm mb-2'>
+                <p className="font-MajritR mb-2 w-full text-left text-sm text-gray-800">
                   {posts[0].author.name} | {posts[0].category}
                 </p>
-                <p>
+                <p className="font-MajritL">
                   {posts[0].excerpt.rendered.substring(
                     3,
-                    posts[0].excerpt.rendered.indexOf(".") + 1
+                    posts[0].excerpt.rendered.indexOf(".") + 1,
                   )}
                 </p>
               </div>
             </div>
 
-            <div id='recentPostCol' className='col-span-1 flex flex-col'>
+            <div id="recentPostCol" className="col-span-1 flex flex-col">
               {posts.slice(1, 4).map((post) => (
-                <div key={post.id} className='p-4  flex-grow'>
-                  <h2 className='text-black font-semibold text-xl hover:hover-translate-y'>
-                    {post.title.rendered}
-                  </h2>
-                  <p className='text-gray-800 text-left text-sm'>
-                    {post.author.name} | {post.category}
-                  </p>
-                  <div
-                    className='truncate-overflow'
-                    dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered.substring(
-                        3,
-                        post.excerpt.rendered.indexOf(".") + 1
-                      ),
-                    }}
-                  />
+                <div key={post.id} className="flex-grow  p-4">
+                  <Link to={`post/${post.id}`}>
+                    <h2 className="hover:hover-translate-y font-MajritB text-xl font-semibold text-black ">
+                      {post.title.rendered}
+                    </h2>
+                    <p className="font-MajritR text-left text-sm text-gray-800">
+                      {post.author.name} | {post.category}
+                    </p>
+                    <div
+                      className="truncate-overflow font-MajritL"
+                      dangerouslySetInnerHTML={{
+                        __html: post.excerpt.rendered.substring(
+                          3,
+                          post.excerpt.rendered.indexOf(".") + 1,
+                        ),
+                      }}
+                    />
+                  </Link>
                 </div>
               ))}
             </div>
 
-            <div id='recentPostCol' className='col-span-1 flex flex-col'>
+            <div id="recentPostCol" className="col-span-1 flex flex-col">
               {posts.slice(4, 7).map((post) => (
-                <div key={post.id} className='p-4  flex-grow '>
-                  <h2 className='text-black font-semibold text-xl hover:hover-translate-y'>
-                    {post.title.rendered}
-                  </h2>
-                  <p className='text-gray-800 text-left text-sm'>
-                    {post.author.name} | {post.category}
-                  </p>
-                  <div
-                    className='truncate-overflow'
-                    dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered.substring(
-                        3,
-                        post.excerpt.rendered.indexOf(".") + 1
-                      ),
-                    }}
-                  />
+                <div key={post.id} className="flex-grow  p-4 ">
+                  <Link to={`post/${post.id}`}>
+                    <h2 className="hover:hover-translate-y font-MajritB text-xl font-semibold text-black">
+                      {post.title.rendered}
+                    </h2>
+                    <p className="font-MajritR text-left text-sm text-gray-800">
+                      {post.author.name} | {post.category}
+                    </p>
+                    <div
+                      className="truncate-overflow font-MajritL"
+                      dangerouslySetInnerHTML={{
+                        __html: post.excerpt.rendered.substring(
+                          3,
+                          post.excerpt.rendered.indexOf(".") + 1,
+                        ),
+                      }}
+                    />
+                  </Link>
                 </div>
               ))}
             </div>

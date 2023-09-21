@@ -3,52 +3,101 @@
 @tailwind utilities;
 
 .truncate-overflow {
-    max-height: 150px; /* Altura máxima permitida antes de truncar */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp:2; /* Número de líneas a mostrar antes de truncar */
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis; /* Mostrar puntos suspensivos (...) cuando se trunca el contenido */
-    white-space: normal; /* Permitir saltos de línea */
-  
-  }
-
-
-#recentPostCol{
-    border-left: 1px solid rgb(190, 190, 190);
+  max-height: 150px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
+.scrolled-header {
+  transition: all 0.35s ease-in-out;
+}
 
-.doubleLineSeparator{
-    border-bottom: 3px double black;
+#recentPostCol {
+  border-left: 1px solid rgb(190, 190, 190);
+}
+
+.doubleLineSeparator {
+  border-bottom: 3px double black;
 }
 
 .scrolled-container {
-    display: flex;
-  }
-  .scrolled-box {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .scrolled-box:first-child  { margin-right: auto; }
-  
-  .scrolled-box:last-child  { margin-left: auto;  }
+  display: flex;
+}
 
-  .text-shadow{
-    text-shadow: 0 0 50px hsla(0,0%,0%,.4);
-  }
+.scrolled-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
 
-  .hover-translate-y {
-  @apply hover:-translate-y-[5px] transition-transform duration-300;
+.scrolled-box:first-child {
+  margin-right: auto;
+}
+
+.scrolled-box:last-child {
+  margin-left: auto;
+}
+
+.text-shadow {
+  text-shadow: 0 0 50px hsla(0, 0%, 0%, 0.4);
+}
+
+.hover-translate-y {
+  @apply hover:-translate-y-[5px] transition-transform  duration-300;
 }
 
 #imgContainer {
   width: 100%;
   height: 0;
-  padding-bottom: 75%; /* Proporción de aspecto deseada (por ejemplo, 4:3) */
+  padding-bottom: 75%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@layer base {
+  @font-face {
+    font-family: Majrit Light;
+    src: url("./assets/fonts/majrit/majrit-text/Majrit-Text-Roman.woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: Majrit Bold;
+    src: url("./assets/fonts/majrit/majrit-text/Majrit-Text-Bold.woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: Majrit Roman;
+    src: url("./assets/fonts/majrit/majrit-text/Majrit-Text-Roman.woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: Marcinantb;
+    src: url("./assets/fonts/marcinantb-regular-webfont.woff");
+  }
+}
+
+.font-MajritL {
+  font-family: 'Majrit Light', serif !important;
+}
+
+.font-MajritR {
+  font-family: 'Majrit Light', serif !important;
+}
+
+.font-MajritB {
+  font-family: 'Majrit Bold', serif !important;
+}
+
+.font-Marcinantb {
+  font-family: 'Marcinantb', serif !important;
 }

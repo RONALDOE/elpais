@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
 
 export default function Footer() {
   return (
-    <div className='mt-8'>Footer</div>
-  )
+    <footer
+      className=" flex w-full items-center justify-between
+    bg-gray-50 px-4 py-3 text-center"
+    >
+      Este Proyecto fue una "prueba tecnica" modalidad take home hecho por
+      Ronaldo Suero el 20/09/2023{" "}
+    </footer>
+  );
 }

@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
-export default function  () {
-  return (
-    <div className="w-full h-2 bg-black my-8"/>
-  )
+export default function () {
+  return <div className="my-8 h-2 w-full bg-black" />;
 }

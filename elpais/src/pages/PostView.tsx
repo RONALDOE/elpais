@@ -8,19 +8,14 @@ import { useParams } from "react-router-dom";
 export default function PostView() {
   const { postId } = useParams();
 
-  // Accedemos a los valores
-
-  //Accedemos a los valores
-
-  const [post, setPost] = useState<Post | null>(null); // Inicializa post como null
+  const [post, setPost] = useState<Post | null>(null);
 
   useEffect(() => {
     const getPost = async () => {
       try {
         if (postId) {
-          // Verifica si postId tiene un valor válido
           const response = await axios.get<Post>(
-            "https://apitest.rdedigital.com/api/v1/posts/" + postId
+            "https://apitest.rdedigital.com/api/v1/posts/" + postId,
           );
           const data = response.data;
           setPost(data);
@@ -30,48 +25,58 @@ export default function PostView() {
       }
     };
 
-    // Llama a getPost solo si postId es válido
     getPost();
   }, []);
 
   useEffect(() => {
     console.log(post);
   }, [post]);
+
   return (
     <Layout Topbar={<Topbar />}>
       <div>
-        <div className='w-full border-b mb-4   border-black'>
-          <span className='text-3xl font-extrabold text-left w-56 pb-2 border-b-[.3rem] border-black block '>
+        <div className="mb-4 w-full border-b border-black">
+          <span className="font-MajritB block w-56 border-b-[.3rem] border-black pb-2 text-left text-3xl ">
             <h1>{post?.category}</h1>
           </span>
         </div>
 
-        <div className='flex flex-col justify-center items-center text-left w-full p-12'>
-          <h1 className='text-[2.5rem] text-justify font-extrabold '>
+        <div className="flex w-full flex-col items-center justify-center p-12 text-left">
+          <h1 className="font-MajritB text-justify text-[2.5rem] font-extrabold">
             {post?.title.rendered}
           </h1>
           <h2
-            className='text-[1.4rem] text-justify font-ligth mt-2'
+            className="font-MajritL mt-2 text-justify text-[1.4rem]"
             dangerouslySetInnerHTML={{
               __html: post?.excerpt?.rendered
-              ? post.excerpt.rendered.substring(
-                  3,
-                  post.excerpt.rendered.indexOf(".") + 1
-                )
-              : "",
+                ? post.excerpt.rendered.substring(
+                    3,
+                    post.excerpt.rendered.indexOf(".") + 1,
+                  )
+                : "",
             }}
           ></h2>
         </div>
+        <div className="mb-12 w-[50rem] border-b-[1px] border-black pb-4">
+          <img src={post?.media} alt="" className="h-[auto] w-[50rem]" />
+          <p className="font-MajritR text-right text-[.8rem] font-normal">
+            {post?.title.rendered}
+          </p>
+          <p className="font-MajritB text-right text-[.8rem] font-medium">
+            {post?.author.name}
+          </p>
+        </div>
 
-        <img src={post?.media} alt='' className='w-full h-[auto]' />
-
-        <div className="w-full text-sm "
-
-dangerouslySetInnerHTML={{
-  __html: post?.content?.rendered ? post.content.rendered : ""
-  
-}}
-        ></div>
+        <div className="flex w-[50rem] justify-center">
+          <div
+            className="font-MajritL px-12 text-justify text-xl font-normal text-black"
+            dangerouslySetInnerHTML={{
+              __html: post?.content?.rendered
+                ? post.content.rendered.replace(/\n{2,}/g, "<br>")
+                : "",
+            }}
+          ></div>
+        </div>
       </div>
     </Layout>
   );
