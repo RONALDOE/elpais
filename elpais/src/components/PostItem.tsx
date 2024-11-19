@@ -10,21 +10,21 @@ function PostItem({ post }: PostItemProps) {
     <div className="mb-4 flex w-2/3 flex-row gap-2 border border-gray-300 p-4">
       <Link to={`/post/${post.id}`}>
         <img
-          src={post.media}
-          alt={post.title.rendered}
+          src={post.media_post}
+          alt={post.title_post}
           className="max-h-[15em]  min-h-[12em] min-w-[20rem]"
         />
       </Link>
       <div className="flex flex-col gap-2   ">
         <Link to={`/post/${post.id}`}>
-          <h2 className="font-MajritB mt-2 text-xl ">{post.title.rendered}</h2>
+          <h2 className="font-MajritB mt-2 text-xl ">{post.title_post}</h2>
         </Link>
         <div
           className="truncate-overflow font-MajritL"
           dangerouslySetInnerHTML={{
-            __html: post.excerpt.rendered.substring(
+            __html: post.content_post.substring(
               0,
-              post.excerpt.rendered.indexOf(".") + 1,
+              post.content_post.indexOf(".") + 1,
             ),
           }}
         />

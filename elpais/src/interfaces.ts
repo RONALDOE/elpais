@@ -1,77 +1,20 @@
-export  interface Post {//La ruta no da el atributo alt de las imagenes
+export interface Post {
   id: number;
-  date: string;
-  date_gmt: string;
-  guid: {
-    rendered: string;
-  };
-  modified: string;
-  modified_gmt: string;
-  slug: string;
-  status: string;
-  type: string;
-  link: string;
-  category: string;
-  title: {
-    rendered: string;
-  };
-  content: {
-    rendered: string;
-    protected: boolean;
-  };
-  excerpt: {
-    rendered: string;
-    protected: boolean;
-  };
-  author: {
-    id: number;
-    name: string;
-    url: string;
-    description: string;
-    link: string;
-    slug: string;
-    avatar_urls: {
-      24: string;
-      48: string;
-      96: string;
-    };
-    meta: any[];
-    _links: {
-      self: { href: string }[];
-      collection: { href: string }[];
-    };
-  };
-  featured_media: number;
-  comment_status: string;
-  ping_status: string;
-  sticky: boolean;
-  template: string;
-  format: string;
-  media: string;
-  meta: {
-    _mi_skip_tracking: boolean;
-    _monsterinsights_sitenote_active: boolean;
-    _monsterinsights_sitenote_note: string;
-    _monsterinsights_sitenote_category: number;
-    footnotes: string;
-  };
-  categories: number[];
-  tags: any[];
-  _links: {
-    self: { href: string }[];
-    collection: { href: string }[];
-    about: { href: string }[];
-    author: { embeddable: boolean; href: string }[];
-    replies: { embeddable: boolean; href: string }[];
-    versionHistory: { count: number; href: string }[];
-    predecessorVersion: { id: number; href: string }[];
-    wp: {
-      featuredmedia: { embeddable: boolean; href: string }[];
-      attachment: { href: string }[];
-      term: { taxonomy: string; embeddable: boolean; href: string }[];
-    };
-  };
+  id_wordpress: number;
+  date_wordpress: string; // Formato de fecha ISO
+  date_gmt: string; // Formato de fecha ISO
+  date_modified: string; // Formato de fecha ISO
+  date_modified_gmt: string; // Formato de fecha ISO
+  status_post: string; // Estado del post, ej. "publish"
+  category_post: string; // Categoría del post, ej. "Noticiero"
+  media_post: string; // URL de la imagen destacada
+  title_post: string; // Título del post
+  content_post: string; // Contenido HTML del post
+  author_id: number; // ID del autor
+  author_name: string; // Nombre del autor
+  author_image: string; // URL del avatar del autor
 }
+
 
 export interface Category {
   category_post: string;

@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/post/:postId" element={<PostView />} />
         <Route path="/category/:category" element={<CategoryView />} />
+        <Route path="/*" element={<p>Upps. Pagina no encontrada</p>} />
       </Routes>
     </BrowserRouter>
   );

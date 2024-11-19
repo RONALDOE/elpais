@@ -10,7 +10,7 @@ export default function RecentNews() {
     const getRecentPosts = async () => {
       try {
         const response = await axios.get<Post[]>(
-          "https://apitest.rdedigital.com/api/v1/latestpost",
+          "https://api.rdedigital.com/api/v2/posts/",
         );
 
         if (response.data) {
@@ -33,28 +33,28 @@ export default function RecentNews() {
               <div id="" className="h-80 w-full px-4">
                 <Link to={`post/${posts[0].id}`}>
                   <img
-                    src={posts[0].media}
+                    src={posts[0].media_post}
                     alt=""
                     className="h-full w-full object-cover"
                   />
                 </Link>
               </div>
               <p className="font-MajritL mt-2 w-full text-right text-[.8rem]  text-gray-500">
-                {posts[0].title.rendered}
+                {posts[0].title_post}
               </p>
               <Link to={`post/${posts[0].id}`}>
                 <h2 className="font-MajritB w-full text-3xl font-semibold text-black">
-                  {posts[0].title.rendered}
+                  {posts[0].title_post}
                 </h2>
               </Link>
 
               <p className="font-MajritR mb-2 w-full text-left text-sm text-gray-800">
-                {posts[0].author.name} | {posts[0].category}
+                {posts[0].author_name} | {posts[0].category_post}
               </p>
-              <p className="font-MajritL">
-                {posts[0].excerpt.rendered.substring(
+              <p className="font-MajritL">  
+                {posts[0].content_post.substring(
                   3,
-                  posts[0].excerpt.rendered.indexOf(".") + 1,
+                  posts[0].content_post.indexOf(".") + 1,
                 )}
               </p>
             </div>
@@ -68,17 +68,17 @@ export default function RecentNews() {
               <div key={post.id} className="flex-grow  p-4">
                 <Link to={`post/${post.id}`}>
                   <h2 className="font-MajritB text-xl font-semibold text-black">
-                    {post.title.rendered}
+                    {post.title_post}
                   </h2>
                   <p className="font-MajritR text-left text-sm text-gray-800">
-                    {post.author.name} | {post.category}
+                    {post.author_name} | {post.category_post}
                   </p>
                   <div
                     className="truncate-overflow font-MajritL"
                     dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered.substring(
+                      __html: post.content_post.substring(
                         3,
-                        post.excerpt.rendered.indexOf(".") + 1,
+                        post.content_post.indexOf(".") + 1,
                       ),
                     }}
                   />
@@ -92,17 +92,17 @@ export default function RecentNews() {
               <Link to={`post/${post.id}`}>
                 <div key={post.id} className="flex-grow  p-4">
                   <h2 className="font-MajritB text-xl font-semibold text-black">
-                    {post.title.rendered}
+                    {post.title_post}
                   </h2>
                   <p className="font-MajritR text-left text-sm text-gray-800">
-                    {post.author.name} | {post.category}
+                    {post.author_name} | {post.category_post}
                   </p>
                   <div
                     className="truncate-overflow font-MajritL"
                     dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered.substring(
+                      __html: post.content_post.substring(
                         3,
-                        post.excerpt.rendered.indexOf(".") + 1,
+                        post.content_post.indexOf(".") + 1,
                       ),
                     }}
                   />

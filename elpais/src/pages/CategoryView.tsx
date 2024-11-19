@@ -15,7 +15,7 @@ export default function CategoryView() {
       try {
         if (category) {
           const response = await axios.get<Post[]>(
-            `https://apitest.rdedigital.com/api/v1/posts/category/${category}`,
+            `https://api.rdedigital.com/api/v2/posts/${category}`,
           );
           const data = response.data;
           setPosts(data);

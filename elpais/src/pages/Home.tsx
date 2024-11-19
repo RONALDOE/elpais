@@ -18,6 +18,7 @@ export default function Home() {
         );
         if (response.data) {
           setCategories(response.data);
+        console.log("Categorías obtenidas:", response.data);
         }
       } catch (error) {
         console.error("Error al obtener las categorías:", error);
