@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import  { useState, useEffect, useRef, useMemo } from "react";
 import axios from "axios";
 import { Category } from "../interfaces.ts";
 import { Link } from "react-router-dom";
@@ -10,17 +10,14 @@ export default function Topbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const objetoRef = useRef<HTMLDivElement | null>(null);
 
-  // Obtener la altura del elemento al montar
-  const alturaObjeto = useMemo(() => objetoRef.current?.clientHeight || 0, [objetoRef.current]);
+  const alturaObjeto = useMemo(() => objetoRef.current?.clientHeight || 0, []);
 
   useEffect(() => {
-    // Actualizar la fecha cada segundo
     const intervalId = setInterval(() => setCurrentDate(new Date()), 1000);
     return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
-    // Obtener categorías de la API
     const getCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
@@ -36,11 +33,9 @@ export default function Topbar() {
     getCategories();
   }, []);
 
-  // Controlar el evento de scroll con debounce
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY >= 200);
+      setIsScrolled(window.scrollY >= 200);
     };
 
     const debounce = (func: () => void, delay: number) => {
@@ -59,7 +54,6 @@ export default function Topbar() {
     };
   }, []);
 
-  // Formatear fecha
   const formattedDate = useMemo(
     () =>
       currentDate.toLocaleDateString("es-ES", {
@@ -84,28 +78,28 @@ export default function Topbar() {
 
   return (
     <header
-      className={`top-0 w-screen bg-white px-[7rem] pt-2 ${
-        isScrolled ? "scrolled-header fixed" : "sticky"
-      }`}
+      className={`top-0 w-screen bg-white px-4 pt-2 sm:px-8 lg:px-16 ${
+        isScrolled ? "fixed shadow-md" : "sticky"
+      } z-50`}
     >
       {!isScrolled && (
         <div id="unScrolled" ref={objetoRef}>
+          {/* Topbar Superior */}
           <div
             id="topItems"
-            className="font-MajritR flex w-full flex-row items-center justify-between px-4"
+            className="font-MajritR flex flex-col items-center justify-between gap-2 sm:flex-row sm:px-4"
           >
-            <div id="topItems-l" className="flex flex-row gap-[.3rem]">
+            <div id="topItems-l" className="flex flex-wrap items-center gap-2 sm:gap-4">
               <p>{formattedDate}</p>
-              <span className="my-[.3rem] w-[.15rem] rounded-sm bg-gray-400 opacity-60" />
+              <span className="hidden h-[1px] w-[.15rem] bg-gray-400 opacity-60 sm:block" />
               <p>{`Actualizado ${hours}:${minutes}`} </p>
-              <span className="my-[.3rem] w-[.2rem] rounded-sm bg-gray-400 opacity-60" />
-              <p className="">GMT-4</p>
-              <span className="my-[.3rem] w-[.15rem] rounded-sm bg-gray-400 opacity-60" />
-              <div className="flex flex-row gap-4">
+              <span className="hidden h-[1px] w-[.15rem] bg-gray-400 opacity-60 sm:block" />
+              <p>GMT-4</p>
+              <div className="flex flex-row gap-2">
                 <p>Seleccione:</p>
                 <select
                   name="nations"
-                  className="rounded-sm border-[1px] border-gray-300 px-2 py-1 font-semibold"
+                  className="rounded-sm border-gray-300 px-2 py-1"
                 >
                   <option value="España">España</option>
                   <option value="América">América</option>
@@ -119,59 +113,67 @@ export default function Topbar() {
                 </select>
               </div>
             </div>
+
             <div className="flex flex-row gap-3" id="topItems-r">
-              <button className="rounded-sm bg-yellow-500 px-2 py-1 font-semibold">
+              <button className="rounded bg-yellow-500 px-2 py-1 text-white font-semibold">
                 Subscribete
               </button>
-              <button className="rounded-sm border-[1px] border-yellow-500 px-2 py-1">
+              <button className="rounded border-yellow-500 px-2 py-1 border text-yellow-500">
                 Iniciar Sesión
               </button>
             </div>
           </div>
 
-          <div
-            id="centerText"
-            className="flex flex-col items-center justify-center"
-          >
+          {/* Centro */}
+          <div id="centerText" className="text-center mt-4">
             <Link to="/">
-              <h1 className="font-MajritB -mb-4 select-none text-[4rem] font-bold uppercase tracking-tighter text-black">
+              <h1 className="font-MajritB text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-black">
                 EL PAÍS
               </h1>
             </Link>
-            <p className="font-MajritL text-center font-semibold uppercase text-black">
-              El Periódico global
+            <p className="font-MajritL text-sm sm:text-base uppercase text-gray-600">
+              El Periódico Global
             </p>
           </div>
-          <div id="navContainer" className="">
-            <ul className="mt-4 flex flex-row items-center justify-center gap-4">
+
+          {/* Menú de Categorías */}
+          <nav id="navContainer" className="mt-4">
+            <ul className="flex flex-wrap justify-center gap-4">
               {categories.map((category) => (
                 <Link
                   to={`/category/${category.category_post}`}
                   key={category.category_post}
                 >
-                  <p className="font-MajritL">{category.category_post}</p>
+                  <p className="font-MajritL text-sm sm:text-base">
+                    {category.category_post}
+                  </p>
                 </Link>
               ))}
             </ul>
-            <div className="mt-4 flex-grow border-t border-black" />
-          </div>
+          </nav>
         </div>
       )}
 
+      {/* Topbar Scrolled */}
       {isScrolled && (
         <div
           id="scrolled"
-          className="flex flex-row items-center justify-between p-2"
+          className="flex flex-row items-center justify-between p-2 sm:p-4"
         >
-          <img className="h-24 w-24" src={Burger} alt="Menu" />
-          <h1 className="font-MajritB -mb-4 w-24 flex-1 text-center text-[3rem] font-bold uppercase tracking-tighter text-black">
+          <img
+            className="h-6 w-6 sm:h-8 sm:w-8"
+            src={Burger}
+            alt="Menu"
+            aria-label="Abrir menú"
+          />
+          <h1 className="font-MajritB text-xl sm:text-2xl lg:text-3xl text-center font-bold uppercase">
             <Link to="/">EL PAÍS</Link>
           </h1>
-          <div className="font-MajritL flex flex-row gap-3" id="topItems-r ">
-            <button className="rounded-sm bg-yellow-500 px-2 py-1 font-semibold">
+          <div className="flex flex-row gap-2 sm:gap-3">
+            <button className="rounded bg-yellow-500 px-2 py-1 text-white font-semibold">
               Subscribete
             </button>
-            <button className="rounded-sm border-[1px] border-yellow-500 px-2 py-1">
+            <button className="rounded border-yellow-500 px-2 py-1 border text-yellow-500">
               Iniciar Sesión
             </button>
           </div>

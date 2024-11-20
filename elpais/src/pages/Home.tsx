@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Layout from "@components/Layout";
 import Topbar from "@components/Topbar.tsx";
 import RecentNews from "@components/RecentPosts";

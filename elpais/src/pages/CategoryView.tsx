@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Layout from "@components/Layout";
 import Topbar from "@components/Topbar";
 import { useParams } from "react-router-dom";
@@ -38,7 +38,7 @@ export default function CategoryView() {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        {posts && posts.map((post) => <PostItem key={post.id} post={post} />)}
+        {posts && posts.map((post) => <PostItem key={post.id_wordpress} post={post} />)}
       </div>
     </Layout>
   );

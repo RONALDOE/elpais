@@ -1,19 +1,27 @@
 import Footer from "@components/Footer";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface LayoutProps {
   children: ReactNode;
   Topbar: JSX.Element;
 }
-const marginTop = localStorage.getItem("marginTop");
-console.log(marginTop);
+
 export default function Layout({ children, Topbar }: LayoutProps) {
+  const [marginTop, setMarginTop] = useState<number | null>(null);
+
+  useEffect(() => {
+    const storedMarginTop = localStorage.getItem("marginTop");
+    setMarginTop(storedMarginTop ? parseInt(storedMarginTop) : 0);
+  }, []);
+
   return (
-    <div className="flex h-full  w-full flex-col ">
+    <div className="flex h-full w-full flex-col">
       {Topbar}
       <div
-        className={`flex-grow bg-white  p-4 mt-[${marginTop}rem] px-[7rem] `}
-        style={{ marginTop: `${marginTop}px` }}
+        className={`flex-grow bg-white px-4 sm:px-6 md:px-10 lg:px-20 ${
+          marginTop !== null ? `mt-[${marginTop}px]` : "mt-0"
+        }`}
+        style={marginTop !== null ? { marginTop: `${marginTop}px` } : {}}
       >
         {children}
       </div>
